@@ -59,7 +59,7 @@
     </div>
 
     <div class="pageDiv">
-        <%//@include file="../include/admin/adminPage.jsp" %>
+        <%@include file="../include/admin/adminPage.jsp" %>
     </div>
 
     <div class="panel panel-warning addDiv">
@@ -69,7 +69,7 @@
                 <table class="addTable">
                     <tr>
                         <td>分类名称</td>
-                        <td><input  id="name" name="name" type="text" class="form-control"></td>
+                        <td><input  id="names" name="name" type="text" class="form-control"></td>
                     </tr>
                     <tr>
                         <td>分类圖片</td>

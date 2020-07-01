@@ -6,6 +6,8 @@ import com.markov.util.Page;
 import java.util.List;
 
 public interface CategoryMapper {
-    List<Category>list();
+    public List<Category>list(Page page);
+    public int count();
+    public int add(Category category);
 
 }
