@@ -9,5 +9,8 @@ public interface CategoryMapper {
     public List<Category>list(Page page);
     public int count();
     public int add(Category category);
+    public int remove(String id);
+    public List<Category> getCategoryById(String id);
+    public void edit(Category category);
 
 }

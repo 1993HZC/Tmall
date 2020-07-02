@@ -14,10 +14,31 @@
             limit #{start},#{count}
         </if>
     </select>
+
+    <select id="getCategoryById" resultType="Category">
+        select * from category where id =(#{id})
+    </select>
+
+
     <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="Category">
         insert into category (name) values (#{name})
     </insert>
 
+    <delete id="remove">
+        delete from category where id=#{id}
+    </delete>
+    <update id="edit" parameterType="Category">
+        update category
+        <set>
+            <if test="category.name != null">
+                name = #{category.name,jdbcType=VARCHAR},
+            </if>
+            <if test="category.id != null">
+                id = #{category.id,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{category.id}
+    </update>
 
 
 </mapper>

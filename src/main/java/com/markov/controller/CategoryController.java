@@ -34,10 +34,10 @@ public class CategoryController {
         return "admin/listCategory";
     }
     @RequestMapping("admin_category_add")
+//    TestCa Category 会自动的初始化，遇到同名字段会被自动注入
     public String add(Model model, TestCa testCa, Category category, HttpSession httpSession, UploadImageFile uploadImageFile) throws IOException {
         System.out.println(testCa.getName());
         System.out.println(category.getId());
-        int id=categoryService.add(category);
         File imageFolder=new File(httpSession.getServletContext().getRealPath("img/category"));
         File file = new File(imageFolder,category.getId()+".jpg");
         if(!file.getParentFile().exists()){
@@ -47,6 +47,34 @@ public class CategoryController {
         BufferedImage img = ImageUtil.change2jpg(file);
         ImageIO.write(img, "jpg", file);
         return "redirect:/admin_category_list";
-
     }
+    @RequestMapping("admin_category_delete")
+    public String remove(Model model,String id,HttpSession session){
+//        删除数据库
+        categoryService.remove(id);
+//        删除图片
+        File imageFolder= new File(session.getServletContext().getRealPath("img/category"));
+        File file = new File(imageFolder,id+".jpg");
+        file.delete();
+
+        return "redirect:/admin_category_list";
+    }
+    @RequestMapping("admin_category_edit")
+    public String edit(Model model,Category newCategory,HttpSession session){
+//        try{
+//            categoryService.edit(newCategory);
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return "redirect:/admin_category_list";
+        model.addAttribute("c",newCategory);
+        return "admin/editCategory";
+    }
+    @RequestMapping("admin_category_update")
+    public String update(Model model,Category newCategory,HttpSession session){
+        Category category=(Category) model.asMap().get("c");
+        return "redirect:/admin_category_list";
+    }
+
 }
