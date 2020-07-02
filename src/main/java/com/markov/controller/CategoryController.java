@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
@@ -60,20 +61,22 @@ public class CategoryController {
         return "redirect:/admin_category_list";
     }
     @RequestMapping("admin_category_edit")
-    public String edit(Model model,Category newCategory,HttpSession session){
-//        try{
-//            categoryService.edit(newCategory);
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return "redirect:/admin_category_list";
-        model.addAttribute("c",newCategory);
+    public String edit(Model model,Category bbCategory,HttpSession session){
+        //名字随便取但是得把这个bbCategory的信息传到下一个地方去
+        model.addAttribute("c",bbCategory);
         return "admin/editCategory";
     }
     @RequestMapping("admin_category_update")
-    public String update(Model model,Category newCategory,HttpSession session){
-        Category category=(Category) model.asMap().get("c");
+    public String update(Model model,Category newCategory,HttpSession httpSession,UploadImageFile uploadImageFile) throws Exception {
+        categoryService.edit(newCategory);
+        MultipartFile image = uploadImageFile.getImage();
+        if(null!=image &&!image.isEmpty()){
+            File  imageFolder= new File(httpSession.getServletContext().getRealPath("img/category"));
+            File file = new File(imageFolder,newCategory.getId()+".jpg");
+            image.transferTo(file);
+            BufferedImage img = ImageUtil.change2jpg(file);
+            ImageIO.write(img, "jpg", file);
+        }
         return "redirect:/admin_category_list";
     }
 

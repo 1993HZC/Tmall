@@ -30,14 +30,11 @@
     <update id="edit" parameterType="Category">
         update category
         <set>
-            <if test="category.name != null">
-                name = #{category.name,jdbcType=VARCHAR},
-            </if>
-            <if test="category.id != null">
-                id = #{category.id,jdbcType=INTEGER},
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
             </if>
         </set>
-        where id = #{category.id}
+        where id = #{id}
     </update>
 
 
