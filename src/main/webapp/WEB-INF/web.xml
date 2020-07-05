@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
-  <!-- 指定spring的配置文件-->
+  <!-- spring的配置文件-->
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:applicationContext.xml</param-value>
@@ -31,7 +31,7 @@
   <servlet>
     <servlet-name>mvc-dispatcher</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <!-- 指定spring mvc的配置文件 -->
+    <!-- spring mvc的配置文件 -->
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>classpath:springMVC.xml</param-value>
@@ -42,6 +42,5 @@
     <servlet-name>mvc-dispatcher</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-
 
 </web-app>

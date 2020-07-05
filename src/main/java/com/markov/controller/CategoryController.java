@@ -1,6 +1,8 @@
 package com.markov.controller;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.markov.pojo.Category;
 import com.markov.pojo.TestCa;
 import com.markov.service.ICategoryService;
@@ -25,20 +27,37 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     public ICategoryService categoryService;
+    /*
+    老办法 分页
+     */
+//    @RequestMapping("admin_category_list")
+//    public String list(Model model, Page page){
+//        List<Category> categoryList=categoryService.getAllCategory(page);
+//        int total = categoryService.count();
+//        page.setTotal(total);
+//        model.addAttribute("cs",categoryList);
+//        model.addAttribute("page", page);
+//        return "admin/listCategory";
+//    }
+
+
     @RequestMapping("admin_category_list")
-    public String list(Model model, Page page){
-        List<Category> categoryList=categoryService.getAllCategory(page);
-        int total = categoryService.count();
+    public String list(Model model, Page page,String ak){
+        /*这句话就是启动分页的意思*/
+        PageHelper.offsetPage(page.getStart(),page.getCount());
+        List<Category> cs= categoryService.listall();
+        int total= (int) new PageInfo<>(cs).getTotal();
         page.setTotal(total);
-        model.addAttribute("cs",categoryList);
+        model.addAttribute("cs",cs);
         model.addAttribute("page", page);
         return "admin/listCategory";
     }
+
     @RequestMapping("admin_category_add")
 //    TestCa Category 会自动的初始化，遇到同名字段会被自动注入
-    public String add(Model model, TestCa testCa, Category category, HttpSession httpSession, UploadImageFile uploadImageFile) throws IOException {
-        System.out.println(testCa.getName());
+    public String add(Model model,Category category, HttpSession httpSession, UploadImageFile uploadImageFile) throws IOException {
         System.out.println(category.getId());
+        categoryService.add(category);
         File imageFolder=new File(httpSession.getServletContext().getRealPath("img/category"));
         File file = new File(imageFolder,category.getId()+".jpg");
         if(!file.getParentFile().exists()){
@@ -50,9 +69,9 @@ public class CategoryController {
         return "redirect:/admin_category_list";
     }
     @RequestMapping("admin_category_delete")
-    public String remove(Model model,String id,HttpSession session){
+    public String remove(Model model,int id,HttpSession session){
 //        删除数据库
-        categoryService.remove(id);
+        categoryService.delete(id);
 //        删除图片
         File imageFolder= new File(session.getServletContext().getRealPath("img/category"));
         File file = new File(imageFolder,id+".jpg");
@@ -68,7 +87,7 @@ public class CategoryController {
     }
     @RequestMapping("admin_category_update")
     public String update(Model model,Category newCategory,HttpSession httpSession,UploadImageFile uploadImageFile) throws Exception {
-        categoryService.edit(newCategory);
+        categoryService.update(newCategory);
         MultipartFile image = uploadImageFile.getImage();
         if(null!=image &&!image.isEmpty()){
             File  imageFolder= new File(httpSession.getServletContext().getRealPath("img/category"));

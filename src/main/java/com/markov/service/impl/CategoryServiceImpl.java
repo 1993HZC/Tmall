@@ -2,6 +2,7 @@ package com.markov.service.impl;
 
 import com.markov.dao.CategoryMapper;
 import com.markov.pojo.Category;
+import com.markov.pojo.CategoryExample;
 import com.markov.service.ICategoryService;
 import com.markov.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,38 +15,31 @@ public class CategoryServiceImpl implements ICategoryService {
     @Autowired
     CategoryMapper categoryMapper;
     @Override
-    public List<Category> getAllCategory(Page page) {
-        return categoryMapper.list(page);
-    }
-    @Override
-    public int count() {
-        return categoryMapper.count();
+    public List<Category> listall() {
+        CategoryExample example =new CategoryExample();
+        example.setOrderByClause("id desc");
+        return categoryMapper.selectByExample(example);
     }
 
     @Override
-    public int add(Category category) {
-        return categoryMapper.add(category);
+    public void add(Category category) {
+        categoryMapper.insert(category);
     }
+
     @Override
-    public int remove(String id){return categoryMapper.remove(id);}
-    @Override
-    public Category getCategoryByid(String id){
-        List<Category>Categorise=categoryMapper.getCategoryById(id);
-        if (Categorise.size()!=1){
-            System.out.println("不存在 或者重复");
-            return null;
-        }
-        return Categorise.get(0);
+    public void delete(int id) {
+        categoryMapper.deleteByPrimaryKey(id);
     }
+
     @Override
-    public void edit(Category newcategory) throws Exception{
-        Category category=this.getCategoryByid(newcategory.getId());
-        if (category==null){
-            throw new Exception("没有该id对应的数据");
-        }
-        categoryMapper.edit(newcategory);
+    public Category get(int id) {
+        return categoryMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void update(Category category) {
+        categoryMapper.updateByPrimaryKeySelective(category);
+    }
 
 
-
-    }
 }

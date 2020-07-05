@@ -6,11 +6,15 @@ import com.markov.util.Page;
 import java.util.List;
 
 public interface ICategoryService {
-    List<Category> getAllCategory(Page page);
-    int count();
-    int add(Category category);
-    int remove(String id);
-    Category getCategoryByid(String id);
-    void edit(Category category)throws Exception;
 
+    List<Category> listall();
+
+    void add(Category category);
+
+
+    void delete(int id);
+
+    Category get(int id);
+
+    void update(Category category);
 }

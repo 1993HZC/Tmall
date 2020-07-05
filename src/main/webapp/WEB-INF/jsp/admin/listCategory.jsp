@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" import="java.util.*"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -69,7 +69,7 @@
                 <table class="addTable">
                     <tr>
                         <td>分类名称</td>
-                        <td><input  id="names" name="name" type="text" class="form-control"></td>
+                        <td><input  id="name" name="name" type="text" class="form-control"></td>
                     </tr>
                     <tr>
                         <td>分类圖片</td>
