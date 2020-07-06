@@ -14,6 +14,7 @@ public class Page {
     }
 
     public Page() {
+        System.out.println("初始化");
         this.count=defaultCount;
     }
 

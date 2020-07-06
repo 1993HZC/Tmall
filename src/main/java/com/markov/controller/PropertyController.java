@@ -66,11 +66,9 @@ public class PropertyController {
     @RequestMapping("admin_property_update")
 //    newproperty是admin_property_edit传过来的
     public String update(Model model,Property newproperty,int id){
-
         propertyService.update(newproperty);
         model.addAttribute("cid",newproperty.getCid());
         return "redirect:/admin_property_list";
-
     }
 
 

@@ -3,6 +3,8 @@ package com.markov.pojo;
 import java.util.Date;
 
 public class Product {
+    private Product product;
+
     private Integer id;
 
     private String name;
@@ -18,6 +20,14 @@ public class Product {
     private Integer cid;
 
     private Date createDate;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public Integer getId() {
         return id;
