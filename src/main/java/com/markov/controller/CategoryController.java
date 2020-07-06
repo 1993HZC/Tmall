@@ -42,7 +42,7 @@ public class CategoryController {
 
 
     @RequestMapping("admin_category_list")
-    public String list(Model model, Page page,String ak){
+    public String list(Model model, Page page){
         /*这句话就是启动分页的意思*/
         PageHelper.offsetPage(page.getStart(),page.getCount());
         List<Category> cs= categoryService.listall();
