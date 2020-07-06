@@ -29,6 +29,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public void update(Product p) {
+        productMapper.updateByPrimaryKeySelective(p);
 
     }
 

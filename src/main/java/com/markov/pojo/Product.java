@@ -5,6 +5,8 @@ import java.util.Date;
 public class Product {
     private Product product;
 
+    private Category category;
+
     private Integer id;
 
     private String name;
@@ -91,5 +93,13 @@ public class Product {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
