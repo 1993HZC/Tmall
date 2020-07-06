@@ -55,6 +55,14 @@ public class ProductController {
         model.addAttribute("cid",cid);
         return "redirect:/admin_product_list";
     }
+    @RequestMapping("admin_product_delete")
+    public String delete(Model model,Product product,Page page,int id){
+        product=productService.get(id);
+        productService.delete(id);
+        model.addAttribute("cid",product.getCid());
+        return "redirect:/admin_product_list";
+    }
+
 
 
 }
