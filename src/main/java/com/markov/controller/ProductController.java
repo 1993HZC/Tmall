@@ -55,6 +55,28 @@ public class ProductController {
         model.addAttribute("cid",cid);
         return "redirect:/admin_product_list";
     }
+    @RequestMapping("admin_product_delete")
+    public String delete(Model model,Product product,Page page,int id){
+        product=productService.get(id);
+        productService.delete(id);
+        model.addAttribute("cid",product.getCid());
+        return "redirect:/admin_product_list";
+    }
+    @RequestMapping("admin_product_edit")
+    public String edit(Model model,Product product,Page page,int id){
+        product=productService.get(id);
+        Category c = categoryService.get(product.getCid());
+        product.setCategory(c);
+        model.addAttribute("p",product);
+        return "admin/editProduct";
+    }
+    @RequestMapping("admin_product_update")
+    public String update(Model model,Product product,Page page,int cid){
+        productService.update(product);
+        model.addAttribute("cid",product.getCid());
+        return "redirect:/admin_product_list";
+    }
+
 
 
 }

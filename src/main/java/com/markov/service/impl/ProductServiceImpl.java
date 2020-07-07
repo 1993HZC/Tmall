@@ -24,17 +24,18 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public void delete(int id) {
-
+        productMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public void update(Product p) {
+        productMapper.updateByPrimaryKeySelective(p);
 
     }
 
     @Override
     public Product get(int id) {
-        return null;
+        return productMapper.selectByPrimaryKey(id);
     }
 
     @Override
