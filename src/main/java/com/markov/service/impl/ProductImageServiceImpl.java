@@ -1,0 +1,45 @@
+package com.markov.service.impl;
+
+import com.markov.dao.ProductImageMapper;
+import com.markov.pojo.ProductImage;
+import com.markov.pojo.ProductImageExample;
+import com.markov.service.IProductImageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ProductImageServiceImpl implements IProductImageService {
+    @Autowired
+    ProductImageMapper productImageMapper;
+    @Override
+    public void add(ProductImage pi) {
+
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
+    public void update(ProductImage pi) {
+
+    }
+
+    @Override
+    public ProductImage get(int id) {
+        return null;
+    }
+
+    @Override
+    public List list(int pid, String type) {
+        ProductImageExample example =new ProductImageExample();
+        example.createCriteria()
+                .andPidEqualTo(pid)
+                .andTypeEqualTo(type);
+        example.setOrderByClause("id desc");
+        return productImageMapper.selectByExample(example);
+    }
+}
