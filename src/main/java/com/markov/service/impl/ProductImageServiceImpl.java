@@ -15,11 +15,13 @@ public class ProductImageServiceImpl implements IProductImageService {
     ProductImageMapper productImageMapper;
     @Override
     public void add(ProductImage pi) {
+        productImageMapper.insertSelective(pi);
 
     }
 
     @Override
     public void delete(int id) {
+        productImageMapper.deleteByPrimaryKey(id);
 
     }
 
@@ -30,7 +32,7 @@ public class ProductImageServiceImpl implements IProductImageService {
 
     @Override
     public ProductImage get(int id) {
-        return null;
+        return productImageMapper.selectByPrimaryKey(id);
     }
 
     @Override
