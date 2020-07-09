@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -36,5 +38,12 @@ public class OrderController {
         model.addAttribute("page", page);
 
         return "admin/listOrder";
+    }
+    @RequestMapping("admin_order_delivery")
+    public String delivery(Order o) throws IOException {
+        o.setDeliveryDate(new Date());
+        o.setStatus(orderService.waitConfirm);
+        orderService.update(o);
+        return "redirect:admin_order_list";
     }
 }

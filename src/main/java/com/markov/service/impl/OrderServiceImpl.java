@@ -32,7 +32,8 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public void update(Order c) {
-        orderMapper.updateByPrimaryKey(c);
+//        这个updateByPrimaryKeySelective要比普通的updateByPrimaryKey要安全的多
+        orderMapper.updateByPrimaryKeySelective(c);
     }
 
     @Override
