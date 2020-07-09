@@ -21,4 +21,8 @@ public class UserServiceImpl implements IUserService {
         userExample.setOrderByClause("id desc");
         return userMapper.selectByExample(userExample);
     }
+    @Override
+    public User get(int id) {
+        return userMapper.selectByPrimaryKey(id);
+    }
 }
