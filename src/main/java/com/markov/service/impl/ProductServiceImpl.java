@@ -51,10 +51,9 @@ public class ProductServiceImpl implements IProductService {
         ProductExample example=new ProductExample();
         example.createCriteria().andCidEqualTo(cid);
         example.setOrderByClause("id desc");
-        Category category=categoryService.get(cid);
-
-
         List<Product>productList=productMapper.selectByExample(example);
+
+        Category category=categoryService.get(cid);
 
         for (Product product:productList){
             int pid=product.getId();
