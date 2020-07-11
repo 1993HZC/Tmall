@@ -49,6 +49,7 @@ public class ProductServiceImpl implements IProductService {
     public List<Product> list(int cid) {
 
         ProductExample example=new ProductExample();
+        /*下面这三句话代表查询功能必须一气呵成（就是这三句话必须连在一起），否则分页功能不起作用*/
         example.createCriteria().andCidEqualTo(cid);
         example.setOrderByClause("id desc");
         List<Product>productList=productMapper.selectByExample(example);
