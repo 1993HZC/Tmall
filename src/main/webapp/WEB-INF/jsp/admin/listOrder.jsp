@@ -55,7 +55,7 @@
 
 					<td>
 						<button oid=${o.id} class="orderPageCheckOrderItems btn btn-primary btn-xs">查看详情</button>
-<%--						waitDelivery才会有发货图标--%>
+
 						<c:if test="${o.status=='waitDelivery'}">
 							<a href="admin_order_delivery?id=${o.id}">
 								<button class="btn btn-primary btn-xs">发货</button>

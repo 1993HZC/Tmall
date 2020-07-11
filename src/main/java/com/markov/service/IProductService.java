@@ -1,5 +1,6 @@
 package com.markov.service;
 
+import com.markov.pojo.Category;
 import com.markov.pojo.Product;
 import com.markov.pojo.Property;
 
@@ -15,4 +16,8 @@ public interface IProductService {
     Product get(int id);
 
     List<Product>list(int cid);
+
+    void fillProduct(List<Category> categoryList);
+
+    void fillProductByRow(List<Category> categoryList);
 }
