@@ -9,6 +9,7 @@ import com.markov.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -70,5 +71,32 @@ public class ProductServiceImpl implements IProductService {
         return productList;
 
     }
-    
+
+    @Override
+    public void fillProduct(List<Category> categoryList) {
+        for (Category category:categoryList){
+            int cid=category.getId();
+            List<Product>productList=this.list(cid);
+            category.setProducts(productList);
+        }
+    }
+
+    @Override
+    public void fillProductByRow(List<Category> categoryList) {
+        int productNumberEachRow = 8;
+
+        for (Category category :categoryList){
+            List<Product>productList=category.getProducts();
+            List<List<Product>> productsByRow =  new ArrayList<>();
+
+            for(int i=0;i<productList.size();i=i+productNumberEachRow){
+                int size = i+productNumberEachRow;
+                size= size>productList.size()?productList.size():size;
+                List<Product> productsOfEachRow =productList.subList(i, size);
+                productsByRow.add(productsOfEachRow);
+            }
+            category.setProductsByRow(productsByRow);
+        }
+    }
+
 }
