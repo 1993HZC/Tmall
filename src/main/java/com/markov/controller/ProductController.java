@@ -26,10 +26,10 @@ public class ProductController {
 
     @RequestMapping("admin_product_list")
     public String list(Model model,int cid,Page page){
-        Category category=categoryService.get(cid);
+        Category category = categoryService.get(cid);
 
         PageHelper.offsetPage(page.getStart(),page.getCount());
-        List<Product>productList=productService.list(cid);
+        List<Product> productList = productService.list(cid);
 
         int total= (int) new PageInfo<>(productList).getTotal();
         page.setTotal(total);
