@@ -2,6 +2,7 @@ package com.markov.service.impl;
 
 
 import com.markov.dao.UserMapper;
+import com.markov.pojo.PropertyValue;
 import com.markov.pojo.User;
 import com.markov.pojo.UserExample;
 import com.markov.service.IUserService;
@@ -25,4 +26,22 @@ public class UserServiceImpl implements IUserService {
     public User get(int id) {
         return userMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public boolean isExist(String name) {
+        UserExample userExample=new UserExample();
+        userExample.createCriteria().andNameEqualTo(name);
+        List<User> userList=userMapper.selectByExample(userExample);
+        if (userList.size()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public void add(User user) {
+        userMapper.insertSelective(user);
+    }
+
 }
