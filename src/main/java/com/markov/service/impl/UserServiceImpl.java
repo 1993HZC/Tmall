@@ -43,5 +43,17 @@ public class UserServiceImpl implements IUserService {
     public void add(User user) {
         userMapper.insertSelective(user);
     }
+    @Override
+    public User getUserbyLogin(String name,String password) {
+        UserExample userExample=new UserExample();
+        userExample.createCriteria().andNameEqualTo(name).andPasswordEqualTo(password);
+        List<User> userList=userMapper.selectByExample(userExample);
+
+        if (userList.isEmpty()){
+            return null;
+        }
+        return userList.get(0);
+
+    }
 
 }
